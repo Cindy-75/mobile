@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyForm(),
+    );
+  }
+}
+
+class MyForm extends StatefulWidget {
+  @override
+  _MyFormState createState() => _MyFormState();
+}
+
+class _MyFormState extends State<MyForm> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  // Validasi email
+  bool isValidEmail(String email) {
+    RegExp emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return emailRegExp.hasMatch(email);
+  }
+
+  // Validasi nomor telepon
+  bool isValidPhoneNumber(String phoneNumber) {
+    RegExp phoneRegExp = RegExp(r'^\d{10,12}$');
+    return phoneRegExp.hasMatch(phoneNumber);
+  }
+
+  void validateForm() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Data valid!')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Data tidak valid!')));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Validasi Form')),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Input email
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty || !isValidEmail(value)) {
+                    return 'Email tidak valid';
+                  }
+                  return null;
+                },
+              ),
+              // Input nomor telepon
+              TextFormField(
+                controller: phoneController,
+                decoration: InputDecoration(labelText: 'Nomor Telepon'),
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value == null || value.isEmpty || !isValidPhoneNumber(value)) {
+                    return 'Nomor telepon tidak valid';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 20),
+              // Tombol Submit
+              ElevatedButton(
+                onPressed: validateForm,
+                child: Text('Submit'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

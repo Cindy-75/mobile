@@ -1,0 +1,129 @@
+main
+import 'package:flutter/material.dart';
+import 'widget_list_img.dart';
+import 'widget_dialog.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Hello World',
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+      ),
+      home: Widget_Dialog(),
+    );
+  }
+}
+
+
+dialog
+import 'package:flutter/material.dart';
+
+class Widget_Dialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Latihan Dialog Box'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: Text('Tombol pemberitahuan'),
+              onPressed: () {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext contect) => AlertDialog(
+                    title: Text('Informasi untuk anda'),
+                    content: Text('Silakan pilih tombol oke atau batal!'),
+                    actions: [
+                      TextButton(
+                          child: Text('OKE'),
+                          onPressed: () => Navigator.pop(context, 'OKE')),
+                      TextButton(
+                          child: Text('Batal'),
+                          onPressed: () => Navigator.pop(context, 'Batal')),
+                    ],
+                  ),
+                ).then((value_click) {
+                  if (value_click != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Anda menekan tombol $value_click'),
+                        action: SnackBarAction(
+                          label: 'OKE',
+                          onPressed: () {},
+                        ),
+                      ),
+                    );
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+list
+import 'package:flutter/material.dart';
+/* import 'wigdet_list_img.dart'; */
+
+class Widget_list_img extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('List View dan Image Assets'),
+      ),
+      body: ListView(
+        children: [
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.access_alarm),
+            title: Text('Alarm'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.phone_android),
+            title: Text('Phone'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.camera),
+            title: Text('Camera'),
+            trailing: Icon(Icons.arrow_forward),
+          ),
+          Divider(),
+          ListTile(
+            title: Text('Gambar ini diambil dari penyimpanan lokal'),
+          ),
+          Card(
+            child: Image.asset('assets/images/logo_iwima.jpg'),
+          ),
+          Divider(),
+          ListTile(
+            title: Text('Gambar ini diambil dari internet'),
+          ),
+          CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTHxuApmxz78WkF9H3KJqMOLtoHn9WHKXcOu04zCwaeza0ULnnQ'),
+            radius: 90,
+          ),
+        ],
+      ),
+    );
+  }
+}

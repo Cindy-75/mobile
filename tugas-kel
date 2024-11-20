@@ -342,3 +342,28 @@ class Buku_Tamu_Kel2 extends StatelessWidget {
     );
   }
 }
+
+pubspec
+name: tugas_kelompok02
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.2
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/pp.jpg
+    - assets/vys.jpeg
+    - assets/cindy.jpeg

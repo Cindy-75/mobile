@@ -1,0 +1,344 @@
+Main
+import 'package:flutter/material.dart';
+import 'menu_kel2.dart';
+import 'profile_kel2.dart';
+import 'tentang_kel2.dart';
+import 'buku_tamu_kel2.dart';
+
+void main() {
+  runApp(Tugas_Kelompok02());
+}
+
+class Tugas_Kelompok02 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Tugas Kelompok 2',
+      debugShowCheckedModeBanner: false,
+      home: Menu_Kel2(),
+      routes: {
+        '/profil': (BuildContext context) => Profil_Kel2(),
+        '/tentang': (BuildContext context) => Tentang_Kel2(),
+        '/buku_tamu': (BuildContext context) => Buku_Tamu_Kel2(),
+      },
+    );
+  }
+}
+
+
+menu_kel
+import 'package:flutter/material.dart';
+
+class Menu_Kel2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Menu Utama Kelompok 2'),
+        backgroundColor: Color(0xffff6e6e),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              color: Colors.blueAccent,
+              child: Text('Profil'),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/profil');
+              },
+            ),
+            Divider(),
+            MaterialButton(
+              color: Colors.pinkAccent,
+              child: Text('Buku Tamu'),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/buku_tamu');
+              },
+            ),
+            Divider(),
+            MaterialButton(
+              color: Color(0xff44ffca),
+              child: Text('Tentang'),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/tentang');
+              },
+            ),
+            Divider(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+profile_kel
+import 'package:flutter/material.dart';
+import 'profile_kel_anggota_nadila.dart';
+import 'profile_kel_anggota_cindy.dart';
+import 'profile_kel_anggota_okvy.dart';
+
+class Profil_Kel2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profil Kelompok 2'),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            MaterialButton(
+              color: Color(0xff8dcdfb),
+              child: Text('Nadila'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Profil_Kel_Anggota_Nadila()),
+                );
+              },
+            ),
+            Divider(),
+            MaterialButton(
+              color: Color(0xffff9dee),
+              child: Text('Cindy'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Profil_Kel_Anggota_Cindy()),
+                );
+              },
+            ),
+            Divider(),
+            MaterialButton(
+              color: Color(0xfffff7a8),
+              child: Text('Okvy'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Profil_Kel_Anggota_Okvy()),
+                );
+              },
+            ),
+            Divider(),
+            MaterialButton(
+              color: Color(0xff1855ff),
+              child: Text('Kembali'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+tentang
+import 'package:flutter/material.dart';
+
+class Tentang_Kel2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tentang Kelompok 2'),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: SingleChildScrollView(
+        // Membuat konten bisa di-scroll
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Judul Tentang Kelompok
+            Text(
+              'Tentang Kelompok 2',
+              style: TextStyle(
+                fontSize: 28, // Ukuran font yang lebih besar untuk judul
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Deskripsi Kelompok
+            Text(
+              'Kelompok 2 terdiri dari tiga anggota yang sangat lucu dan ceria:',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 20),
+
+            // Deskripsi Anggota
+            _buildMemberDescription(
+              'Nadila Arofanti - 22.230.0072',
+              'Nadila adalah anggota yang selalu penuh energi dan sangat kreatif. '
+                  'Dia selalu memiliki ide-ide segar dan membawa keceriaan di setiap kegiatan kelompok.',
+            ),
+            SizedBox(height: 20), // Memberi jarak antar anggota
+            _buildMemberDescription(
+              'Cindy Cahyaningsih - 22.230.0075',
+              'Cindy adalah anggota yang penuh humor dan sangat mudah bergaul. '
+                  'Dia selalu bisa membuat suasana menjadi lebih hidup dengan canda tawa.',
+            ),
+            SizedBox(height: 20),
+            _buildMemberDescription(
+              'Okvy Anggreani - 22.230.0099',
+              'Okvy adalah anggota yang ramah dan ceria, selalu siap membantu teman-temannya. '
+                  'Dengan sikapnya yang positif, dia membuat kelompok menjadi lebih solid.',
+            ),
+            SizedBox(height: 30), // Memberi jarak lebih banyak sebelum penutup
+
+            // Penutup
+            Text(
+              'Bersama-sama, Kelompok 2 berhasil menciptakan suasana yang menyenangkan dan penuh dengan kebahagiaan dalam setiap kegiatan dengan story telling ngarang!',
+              style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Fungsi untuk membuat deskripsi setiap anggota
+  Widget _buildMemberDescription(String name, String description) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Nama anggota dengan style lebih besar dan bold
+        Text(
+          name,
+          style: TextStyle(
+            fontSize: 22, // Ukuran font yang lebih besar untuk nama
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        SizedBox(height: 6),
+        // Deskripsi anggota dengan teks normal
+        Text(
+          description,
+          style: TextStyle(fontSize: 16, color: Colors.black87),
+        ),
+      ],
+    );
+  }
+}
+
+bukutamu
+import 'package:flutter/material.dart';
+
+class Buku_Tamu_Kel2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff6da3fe),
+        title: Text('Buku Tamu Kelompok 2'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            // Kembali ke halaman sebelumnya
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Halo Selamat Datang di kelompok kami,\nmohon isi data diri :',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Buku Tamu Kelompok 2',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
+              // Nama
+              TextFormField(
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  prefixIcon: Icon(Icons.person),
+                  hintText: 'Nama',
+                  labelText: 'Nama *',
+                ),
+              ),
+              SizedBox(height: 15),
+              // Telepon
+              TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  prefixIcon: Icon(Icons.phone),
+                  hintText: 'Telepon',
+                  labelText: 'Telepon *',
+                ),
+              ),
+              SizedBox(height: 15),
+              // Email
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  filled: true,
+                  prefixIcon: Icon(Icons.email),
+                  hintText: 'E-mail',
+                  labelText: 'E-mail *',
+                ),
+              ),
+              SizedBox(height: 15),
+              // Alamat
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Alamat',
+                  labelText: 'Alamat *',
+                ),
+              ),
+              SizedBox(height: 15),
+              // Keperluan
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Keperluan',
+                  labelText: 'Keperluan *',
+                ),
+              ),
+              SizedBox(height: 20),
+              // Tombol Kirim
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Data Terkirim')),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xffe6e6e6),
+                  ),
+                  child: Text('KIRIM'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
